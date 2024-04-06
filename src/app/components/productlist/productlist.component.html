@@ -1,0 +1,30 @@
+<!-- card -->
+<app-loader  [loader]="loader"></app-loader>
+<div  class=" grid-cols-1  mx-14 my-10  grid md:grid-cols-3  gap-3" >
+  
+<div *ngFor=" let item of productApi$.listProducts()" class="card w-96 bg-base-100 shadow-xl">
+    <figure><img class=" w-full h-56" src={{item.image}} alt="Shoes" /></figure>
+    <div class="card-body">
+      <div class="flex gap-4">
+      <h2 class="card-title">{{item.title}}</h2>
+      <div class="badge badge-error font-medium text-xs badge-md my-2">stock:{{item.rating.count}}</div>
+    </div>
+      <ng-container *ngIf="!viewmore">
+      <p>{{item.description |slice:0:100}} <button class="text-red-400" (click)="viewMore()"> {{viewmore ? 'less' : 'more..' }}</button></p>
+    </ng-container>
+      <ng-container *ngIf="viewmore">
+        <p>{{item.description }} <button  class="text-red-400" (click)="viewMore()"> View less</button></p>
+      </ng-container>
+      <div class="card-actions justify-start ">
+        <button (click)="addItem(item)"  class="btn btn-sm  btn-primary">AddTo Cart</button>
+       <p  class=" text-green-600 font-bold ml-36  mt-1"> {{item.price | currency :'USD'}}</p>
+      </div>
+      
+       
+       
+    
+    
+    </div>
+  </div>
+
+</div>
